@@ -1,0 +1,93 @@
+#' Computes convergence diagnostics for a \code{mids} object
+#'
+#' Takes an object of class \code{mids}, computes the autocorrelation
+#' and/or potential scale reduction factor, and returns a \code{data.frame}
+#' with the specified diagnostic(s) per iteration.
+#'
+#' @aliases convergence
+#' @param data An object of class \code{mids} as created by the function
+#' \code{mice()}.
+#' @param diagnostic A keyword. One of the following keywords: \code{"ac"},
+#' \code{"all"}, \code{"gr"} and \code{"psrf"}. See the Details section
+#' for the interpretation.
+#' The default is \code{diagnostic = "all"} which returns both the
+#' autocorrelation and potential scale reduction factor per iteration.
+#' @param \dots Additional arguments. Not used.
+#' @return A \code{data.frame} with the autocorrelation and/or potential
+#' scale reduction factor per iteration of the MICE algorithm.
+#' @details
+#' The argument \code{diagnostic} can be length-1 character, which is
+#' matched to one of the following keywords:
+#' \describe{
+#' \item{\code{"all"}}{computes both the autocorrelation as well as the
+#' potential scale reduction factor per iteration;}
+#' \item{\code{"ac"}}{computes only the autocorrelation per iteration;}
+#' \item{\code{"psrf"}}{computes only the potential scale reduction factor
+#' per iteration;}
+#' \item{\code{"gr"}}{same as \code{psrf}, the potential scale reduction
+#' factor is colloquially called the Gelman-Rubin diagnostic.}
+#' }
+#' @seealso \code{\link{mice}}, \code{\link[=mids-class]{mids}}
+#' @keywords none
+#' @examples
+#'
+#' # obtain imputed data set
+#' imp <- mice(nhanes2, maxit = 6, print = FALSE)
+#' # compute convergence diagnostics
+#' convergence(imp)
+#' @export
+convergence.mids <- function(data, diagnostic = "all", ...) {
+  # install.on.demand("rstan", ...)
+  if (!is.mids(data))
+    stop("'data' not of class 'mids'")
+  if (diagnostic == "gr") {
+    diagnostic <- "psrf"
+  }
+  
+  m <- as.integer(data$m)
+  t <- as.integer(data$iteration)
+  vars <- names(data$data)
+  out <- data.frame(it = 1:t)
+  
+  # reshape into list per imputation
+  per_m <-
+    lapply(1:m, function(x)
+      data$chainMean[, , x] %>%
+        t() %>%
+        as.data.frame())
+  
+  # reshape into list per variable
+  per_v <- map(vars, ~ {
+    per_m %>%
+      map(.x) %>%
+      do.call(cbind, .)
+  })
+  
+  # compute autocorrelation
+  if (diagnostic == "all" | diagnostic == "ac") {
+    ac <-
+      map(per_v, function(.x) {
+        map_dbl(3:t, function(.y) {
+          map_dbl(1:m, function(.z) {
+            suppressWarnings(cor(.x[1:.y - 1, .z], .x[2:.y, .z]))
+          }) %>% max()
+        })
+      }) %>%
+      setNames(., paste0("ac_", vars)) %>%
+      as.data.frame() %>%
+      rbind(NA, NA, .)
+    out <- cbind(out, ac)
+  }
+  
+  # compute potential scale reduction factor
+  if (diagnostic == "all" | diagnostic == "psrf") {
+    psrf <- per_v %>%
+      setNames(., paste0("psrf_", vars)) %>%
+      map_dfc(., ~ map_dbl(1:t, function(it) {
+        rstan::Rhat(.[1:it, ])
+      }))
+    out <- cbind(out, psrf)
+  }
+  
+  return(out)
+}
