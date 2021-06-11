@@ -37,7 +37,8 @@
 #' convergence(imp)
 #' @export
 convergence.mids <- function(data, diagnostic = "all", ...) {
-  # install.on.demand("rstan", ...)
+  install.on.demand("rstan", ...)
+  install.on.demand("purrr", ...)
   if (!is.mids(data))
     stop("'data' not of class 'mids'")
   if (diagnostic == "gr") {
@@ -57,36 +58,36 @@ convergence.mids <- function(data, diagnostic = "all", ...) {
         as.data.frame())
   
   # reshape into list per variable
-  per_v <- map(vars, ~ {
+  per_v <- purrr::map(vars, ~ {
     per_m %>%
-      map(.x) %>%
-      do.call(cbind, .)
+      purrr::map(.x) %>%
+      do.call(base::cbind, .)
   })
   
   # compute autocorrelation
   if (diagnostic == "all" | diagnostic == "ac") {
     ac <-
-      map(per_v, function(.x) {
-        map_dbl(3:t, function(.y) {
-          map_dbl(1:m, function(.z) {
+      purrr::map(per_v, function(.x) {
+        purrr::map_dbl(3:t, function(.y) {
+          purrr::map_dbl(1:m, function(.z) {
             suppressWarnings(cor(.x[1:.y - 1, .z], .x[2:.y, .z]))
           }) %>% max()
         })
       }) %>%
-      setNames(., paste0("ac_", vars)) %>%
+      stats::setNames(., paste0("ac_", vars)) %>%
       as.data.frame() %>%
-      rbind(NA, NA, .)
-    out <- cbind(out, ac)
+      base::rbind(NA, NA, .)
+    out <- base::cbind(out, ac)
   }
   
   # compute potential scale reduction factor
   if (diagnostic == "all" | diagnostic == "psrf") {
     psrf <- per_v %>%
-      setNames(., paste0("psrf_", vars)) %>%
-      map_dfc(., ~ map_dbl(1:t, function(it) {
+      stats::setNames(., paste0("psrf_", vars)) %>%
+      purrr::map_dfc(., ~ purrr::map_dbl(1:t, function(it) {
         rstan::Rhat(.[1:it, ])
       }))
-    out <- cbind(out, psrf)
+    out <- base::cbind(out, psrf)
   }
   
   return(out)

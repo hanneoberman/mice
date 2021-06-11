@@ -80,6 +80,6 @@ LazyLoad: yes
 LazyData: yes
 URL: https://github.com/amices/mice, https://amices.org/mice/, https://stefvanbuuren.name/fimd/
 BugReports: https://github.com/amices/mice/issues
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.1.9000
 LinkingTo: cpp11, Rcpp
 SystemRequirements: C++11
