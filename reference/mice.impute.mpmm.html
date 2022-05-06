@@ -12,7 +12,7 @@ for instance, polynomials, interactions, range restrictions and sum scores."><!-
     
     <a class="navbar-brand me-2" href="../index.html">mice</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">3.14.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">3.14.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -156,14 +156,14 @@ Chapman &amp; Hall/CRC. Boca Raton, FL.</p>
 <span class="r-in"><span class="co"># Pool results</span></span>
 <span class="r-in"><span class="fu"><a href="pool.html">pool</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">imp</span>, <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span> <span class="op">+</span> <span class="va">xx</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Class: mipo    m = 5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          term m   estimate         ubar            b           t dfcom       df</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 (Intercept) 5 0.02128821 0.0014475955 3.696288e-05 0.001491951   997 795.6846</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2           x 5 0.49284202 0.0009351946 1.149981e-04 0.001073192   997 189.1460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3          xx 5 0.48002858 0.0004672953 3.255565e-05 0.000506362   997 388.0266</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          riv     lambda        fmi</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.03064078 0.02972984 0.03215951</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.14756038 0.12858616 0.13765648</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.08360191 0.07715187 0.08187200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          term m   estimate         ubar            b            t dfcom</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 (Intercept) 5 0.02585812 0.0014407327 1.574032e-04 0.0016296164   997</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2           x 5 0.49566631 0.0009449814 1.265517e-04 0.0010968434   997</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3          xx 5 0.47652865 0.0004690620 5.967281e-05 0.0005406694   997</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         df       riv    lambda       fmi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 222.4505 0.1311026 0.1159069 0.1237498</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 167.8167 0.1607037 0.1384537 0.1485410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 180.3859 0.1526608 0.1324421 0.1419036</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Plot results</span></span>
 <span class="r-in"><span class="fu"><a href="stripplot.mids.html">stripplot</a></span><span class="op">(</span><span class="va">imp</span><span class="op">)</span></span>

@@ -18,7 +18,7 @@ pan package."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
     
     <a class="navbar-brand me-2" href="../index.html">mice</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">3.14.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">3.14.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -206,35 +206,35 @@ Mathematics Education, Kiel, Germany), <a href="mailto:robitzsch@ipn.uni-kiel.de
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     expand, pack, unpack</span>
 <span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">x</span> <span class="op">|</span> <span class="va">group</span><span class="op">)</span> <span class="op">+</span> <span class="va">x</span>, data <span class="op">=</span> <span class="fu"><a href="complete.mids.html">complete</a></span><span class="op">(</span><span class="va">imp1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Model failed to converge with max|grad| = 0.00213143 (tol = 0.002, component 1)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> boundary (singular) fit: see help('isSingular')</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Linear mixed model fit by REML ['lmerMod']</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Formula: y ~ (1 + x | group) + x</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Data: complete(imp1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> REML criterion at convergence: 13060.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> REML criterion at convergence: 12777.8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Scaled residuals: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Min      1Q  Median      3Q     Max </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -3.5505 -0.6840 -0.0130  0.6825  3.3998 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -3.4004 -0.6664 -0.0112  0.6772  4.3043 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Random effects:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Groups   Name        Variance Std.Dev. Corr </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  group    (Intercept) 0.278887 0.52810       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           x           0.002562 0.05062  -0.48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Residual             0.712357 0.84401       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Groups   Name        Variance  Std.Dev. Corr </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  group    (Intercept) 2.584e-01 0.508330      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           x           4.427e-05 0.006654 -1.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Residual             6.756e-01 0.821941      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of obs: 5000, groups:  group, 250</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Fixed effects:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               Estimate Std. Error t value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) -0.0005157  0.0354747  -0.015</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x            0.3592107  0.0127720  28.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              Estimate Std. Error t value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 0.0004851  0.0341865   0.014</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x           0.3437450  0.0120172  28.605</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Correlation of Fixed Effects:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   (Intr)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x -0.115</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x -0.034</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> optimizer (nloptwrap) convergence code: 0 (OK)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Model failed to converge with max|grad| = 0.00213143 (tol = 0.002, component 1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> boundary (singular) fit: see help('isSingular')</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Examples of predictorMatrix specification</span></span>
