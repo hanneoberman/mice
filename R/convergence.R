@@ -122,3 +122,5 @@ convergence <- function(data, diagnostic = "all", parameter = "mean", ...) {
 # function to extend is.nan() to data.frame objects
 #' @export
 is.nan.data.frame <- function(x) do.call(cbind, lapply(x, is.nan))
+
+# https://github.com/stan-dev/rstan/blob/develop/rstan/rstan/R/monitor.R
